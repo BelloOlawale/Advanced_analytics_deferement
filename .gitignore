@@ -232,3 +232,9 @@ data/*.tsv
 
 # agent query logs
 logs/
+
+# Source/client binary documents — do not commit (commercial wording, binary inputs)
+*.docx
+*.doc
+*.xlsx
+*.xls
