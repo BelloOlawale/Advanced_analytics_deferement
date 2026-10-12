@@ -218,3 +218,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- NewCross EP analysis data (production data must never be committed) ---
+data/*.csv
+data/*.parquet
+data/*.xlsx
+data/*.json
+data/*.tsv
+!data/README.md
+!data/.gitkeep
+.env
+*.secret
+
+# agent query logs
+logs/
