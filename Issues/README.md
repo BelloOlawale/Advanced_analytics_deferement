@@ -23,7 +23,7 @@ and is independently demoable. No issue delivers only a layer.
 | ISS-006 | VS2 | L1 deviation v1 (uptime) | backlog |
 | ISS-007 | VS3 | L1 deviation v2 (all signals) | backlog |
 | ISS-008 | VS4 | Lead-time measurement harness | backlog |
-| ISS-009 | VS5 | Onset labels + L2 model v1 | backlog |
+| ISS-009 | VS5 | Onset labels + L2 model v1 | done (rejected) |
 | ISS-010 | VS6 | L3 value ranking + tiering | backlog |
 | ISS-011 | VS7 | Data Activator alerts | backlog |
 | ISS-012 | VS8 | Feedback loop | backlog |
@@ -32,6 +32,7 @@ and is independently demoable. No issue delivers only a layer.
 | ISS-015 | VS11 | Output tables + semantic model | backlog |
 | ISS-016 | VS12 | Power BI report pages | backlog |
 | ISS-017 | VS13 | Publish app, RLS, refresh | backlog |
+| ISS-018 | Enabler | Unique episode id (include `cause_group`) | backlog |
 
 ## Issue template
 ```

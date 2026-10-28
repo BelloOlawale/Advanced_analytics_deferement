@@ -1,0 +1,139 @@
+table gold_deviation_daily
+	lineageTag: a00a2f45-0ae0-53e3-b657-cff4777c9c66
+
+	column entity_type
+		dataType: string
+		lineageTag: 68a84d9d-d690-5611-97b3-060626a2ad00
+		summarizeBy: none
+		sourceColumn: entity_type
+
+	column entity_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c55668b-8cd7-521f-a005-a15320e51007
+		summarizeBy: none
+		sourceColumn: entity_id
+
+	column entity_name
+		dataType: string
+		lineageTag: 838fefcb-c3a2-5ce0-9ef0-e603eae81b58
+		summarizeBy: none
+		sourceColumn: entity_name
+
+	column date
+		isKey
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 43739c20-631b-568c-b7e8-2c7bbdeaa91d
+		summarizeBy: none
+		sourceColumn: date
+
+	column metric
+		dataType: string
+		lineageTag: 99286544-9a2e-52c5-81f4-c4643ea0defd
+		summarizeBy: none
+		sourceColumn: metric
+
+	column metric_group
+		dataType: string
+		lineageTag: 542f7ed6-84ad-5026-b685-4918453a28c4
+		summarizeBy: none
+		sourceColumn: metric_group
+
+	column higher_is_bad
+		dataType: boolean
+		lineageTag: 1763b00a-be0e-5348-ab75-0bc879ef697d
+		summarizeBy: none
+		sourceColumn: higher_is_bad
+
+	column value
+		dataType: double
+		formatString: 0.0
+		lineageTag: fcf586b2-d0a3-5a81-ada1-fd6fde8f17cc
+		summarizeBy: none
+		sourceColumn: value
+
+	column expected
+		dataType: double
+		formatString: 0.0
+		lineageTag: 5affb47b-5767-5788-8cb5-804579432e7e
+		summarizeBy: none
+		sourceColumn: expected
+
+	column deviation
+		dataType: double
+		formatString: 0.0
+		lineageTag: 5185022c-c97d-5037-ba41-d48c5f9b5256
+		summarizeBy: none
+		sourceColumn: deviation
+
+	column pct_deviation
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 52fc1edd-a8be-5f50-acdb-c1fb06061d9e
+		summarizeBy: none
+		sourceColumn: pct_deviation
+
+	column robust_z
+		dataType: double
+		formatString: 0.00
+		lineageTag: 2616339a-9648-5fb4-bb1d-6e4a2056b774
+		summarizeBy: none
+		sourceColumn: robust_z
+
+	column magnitude
+		dataType: double
+		formatString: 0.0
+		lineageTag: 8a515c13-8ca5-5e68-a70e-ebefda2a55e7
+		summarizeBy: none
+		sourceColumn: magnitude
+
+	column direction
+		dataType: string
+		lineageTag: edc601bf-fffa-5552-93a2-fd8d75763605
+		summarizeBy: none
+		sourceColumn: direction
+
+	column is_outlier
+		dataType: boolean
+		lineageTag: 5209199e-1030-5b66-9b19-716e2362fd35
+		summarizeBy: none
+		sourceColumn: is_outlier
+
+	column baseline_version
+		dataType: string
+		lineageTag: 96348c12-7b5e-57bf-aa37-7ce854c2a449
+		summarizeBy: none
+		sourceColumn: baseline_version
+
+	column baseline_phase
+		dataType: string
+		lineageTag: 0382f1ec-4479-50eb-a5f5-8bf7b93c03c0
+		summarizeBy: none
+		sourceColumn: baseline_phase
+
+	measure 'Bad Z' = AVERAGEX('gold_deviation_daily', IF('gold_deviation_daily'[higher_is_bad], 'gold_deviation_daily'[robust_z], -'gold_deviation_daily'[robust_z]))
+		formatString: 0.00
+		lineageTag: 0b8f9b37-02c8-5aeb-9678-e0fabb9ef9c2
+
+	measure 'Actual Oil' = CALCULATE(SUM('gold_deviation_daily'[value]), 'gold_deviation_daily'[metric] = "oil")
+		formatString: #,##0.0
+		lineageTag: a0895276-c74f-5389-9571-edbf2146a974
+
+	measure 'Expected Oil' = CALCULATE(SUM('gold_deviation_daily'[expected]), 'gold_deviation_daily'[metric] = "oil")
+		formatString: #,##0.0
+		lineageTag: 48e976d5-1779-5c6d-a2b9-2b05176d99b2
+
+	measure 'Bad Z (scored)' = CALCULATE([Bad Z], 'gold_deviation_daily'[baseline_phase] = "scored")
+		formatString: 0.00
+		lineageTag: 55681aaf-dda3-5582-ae79-dc5eceb0c78e
+
+	measure 'Max Bad Z (scored)' = CALCULATE(MAXX('gold_deviation_daily', IF('gold_deviation_daily'[higher_is_bad], 'gold_deviation_daily'[robust_z], -'gold_deviation_daily'[robust_z])), 'gold_deviation_daily'[baseline_phase] = "scored")
+		formatString: 0.00
+		lineageTag: e8eaa4e8-751c-57bf-820d-4f6a6876501f
+
+	partition gold_deviation_daily = entity
+		mode: directLake
+		source
+			entityName: gold_deviation_daily
+			expressionSource: DatabaseQuery

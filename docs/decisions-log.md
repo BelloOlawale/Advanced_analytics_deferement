@@ -90,6 +90,12 @@
 **Status:** Agreed.
 **Docs:** `early-warning-model-design.md` §3, `prd-deferment-early-warning.md` §7 (FR12).
 
+### D-15 — Keep rules v1; Layer 2 v1 was rejected
+**Decision:** Do not promote the Layer 2 onset model as the primary alert engine. Keep rules v1. The learned model may be used only as a secondary ranking/prioritisation signal until a longer history is available.
+**Why:** On the 3-fold chronological backtest the logistic challenger improved ranking (material PR-AUC 0.706 vs 0.603) but at the same 13-alert budget it did not add lead time at equal false alarms: model 9 confirmed / 4 false / 2.0 days vs rules 10 / 3 / 3.0 days. The gate in the serving plan therefore fails.
+**Status:** Decided 2026-10-22. Revisit with real data and a longer history.
+**Docs:** `slice9-onset-model-report.md`, `fabric-semantic-model-and-report-plan.md` §12b, `Issues/Done/ISS-009-vs5-l2-onset-model.md`.
+
 ---
 
 ## Open decisions (not yet settled)

@@ -1,0 +1,198 @@
+table gold_entity_baseline
+	lineageTag: c1d4d622-6ff9-530b-8831-6eff105cefe4
+
+	column entity_type
+		dataType: string
+		lineageTag: 68a84d9d-d690-5611-97b3-060626a2ad00
+		summarizeBy: none
+		sourceColumn: entity_type
+
+	column entity_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c55668b-8cd7-521f-a005-a15320e51007
+		summarizeBy: none
+		sourceColumn: entity_id
+
+	column entity_name
+		dataType: string
+		lineageTag: 838fefcb-c3a2-5ce0-9ef0-e603eae81b58
+		summarizeBy: none
+		sourceColumn: entity_name
+
+	column metric
+		dataType: string
+		lineageTag: 99286544-9a2e-52c5-81f4-c4643ea0defd
+		summarizeBy: none
+		sourceColumn: metric
+
+	column metric_group
+		dataType: string
+		lineageTag: 542f7ed6-84ad-5026-b685-4918453a28c4
+		summarizeBy: none
+		sourceColumn: metric_group
+
+	column higher_is_bad
+		dataType: boolean
+		lineageTag: 1763b00a-be0e-5348-ab75-0bc879ef697d
+		summarizeBy: none
+		sourceColumn: higher_is_bad
+
+	column baseline_version
+		dataType: string
+		lineageTag: 96348c12-7b5e-57bf-aa37-7ce854c2a449
+		summarizeBy: none
+		sourceColumn: baseline_version
+
+	column estimation_start
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 34858708-b734-539a-b955-26ef02d5b23c
+		summarizeBy: none
+		sourceColumn: estimation_start
+
+	column estimation_end
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 938941c9-ca6a-5329-ab27-fbcd91afc8a5
+		summarizeBy: none
+		sourceColumn: estimation_end
+
+	column n_obs
+		dataType: int64
+		formatString: 0
+		lineageTag: ac574489-d1ba-5423-b5f1-c38f40c276c2
+		summarizeBy: none
+		sourceColumn: n_obs
+
+	column median
+		dataType: double
+		formatString: 0.0
+		lineageTag: 78e06801-19f6-506f-98ce-46a5b1f0aa01
+		summarizeBy: none
+		sourceColumn: median
+
+	column mad
+		dataType: double
+		formatString: 0.0
+		lineageTag: 9dca3d85-6ec6-5977-9642-9e3a626874d1
+		summarizeBy: none
+		sourceColumn: mad
+
+	column robust_scale
+		dataType: double
+		formatString: 0.0
+		lineageTag: 67777cd9-4695-579b-acb1-f4c1c79c3c89
+		summarizeBy: none
+		sourceColumn: robust_scale
+
+	column mean
+		dataType: double
+		formatString: 0.0
+		lineageTag: fcdd05d6-d515-5e37-8f20-0bcc66204e66
+		summarizeBy: none
+		sourceColumn: mean
+
+	column stddev
+		dataType: double
+		formatString: 0.0
+		lineageTag: e9449d89-8ae3-55ce-8c8b-1c134c05b3bf
+		summarizeBy: none
+		sourceColumn: stddev
+
+	column p10
+		dataType: double
+		formatString: 0.0
+		lineageTag: 99382de7-e811-5082-93fc-4769f74a0cfe
+		summarizeBy: none
+		sourceColumn: p10
+
+	column p90
+		dataType: double
+		formatString: 0.0
+		lineageTag: e655d756-33b1-57df-b4da-0528ffa9b0b8
+		summarizeBy: none
+		sourceColumn: p90
+
+	column min_value
+		dataType: double
+		formatString: 0.0
+		lineageTag: 579a3a6a-6855-579a-8bb5-2d64ff87cf02
+		summarizeBy: none
+		sourceColumn: min_value
+
+	column max_value
+		dataType: double
+		formatString: 0.0
+		lineageTag: 81bedef4-4924-5e8b-9ad6-d0c0a4007e89
+		summarizeBy: none
+		sourceColumn: max_value
+
+	column seasonal_spread
+		dataType: double
+		formatString: 0.0
+		lineageTag: 6d3bca4b-8e2d-527a-afd0-685b5e27720a
+		summarizeBy: none
+		sourceColumn: seasonal_spread
+
+	column computed_at_utc
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:mm:ss
+		lineageTag: b836b26f-3e2c-584d-b98e-e945c1c5d75e
+		summarizeBy: none
+		sourceColumn: computed_at_utc
+
+	column weekday_expected_0
+		dataType: double
+		formatString: 0.0
+		lineageTag: 1e359b92-e95e-5c88-a023-f18c815db609
+		summarizeBy: none
+		sourceColumn: weekday_expected_0
+
+	column weekday_expected_1
+		dataType: double
+		formatString: 0.0
+		lineageTag: 0f32fa93-9458-5538-8f6e-2460b128680d
+		summarizeBy: none
+		sourceColumn: weekday_expected_1
+
+	column weekday_expected_2
+		dataType: double
+		formatString: 0.0
+		lineageTag: 44fb7475-ba35-574d-ba64-9479b7aefc88
+		summarizeBy: none
+		sourceColumn: weekday_expected_2
+
+	column weekday_expected_3
+		dataType: double
+		formatString: 0.0
+		lineageTag: a7e0f521-0ff3-520f-9ab1-d809603b008e
+		summarizeBy: none
+		sourceColumn: weekday_expected_3
+
+	column weekday_expected_4
+		dataType: double
+		formatString: 0.0
+		lineageTag: 198570bb-e2f0-5871-aefc-772655994f07
+		summarizeBy: none
+		sourceColumn: weekday_expected_4
+
+	column weekday_expected_5
+		dataType: double
+		formatString: 0.0
+		lineageTag: fae1c3a1-b0f3-5161-be04-aefb1959691e
+		summarizeBy: none
+		sourceColumn: weekday_expected_5
+
+	column weekday_expected_6
+		dataType: double
+		formatString: 0.0
+		lineageTag: d28d6469-106f-50d1-9418-0fa8f50aa450
+		summarizeBy: none
+		sourceColumn: weekday_expected_6
+
+	partition gold_entity_baseline = entity
+		mode: directLake
+		source
+			entityName: gold_entity_baseline
+			expressionSource: DatabaseQuery

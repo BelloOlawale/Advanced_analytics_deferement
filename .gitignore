@@ -228,7 +228,15 @@ data/*.tsv
 !data/README.md
 !data/.gitkeep
 .env
+.env.*
+!.env.example
 *.secret
+
+# per-environment Azure CLI token caches
+.azure-fabric/
+
+# generated test/seed data (may contain client-derived values)
+test_data/
 
 # agent query logs
 logs/

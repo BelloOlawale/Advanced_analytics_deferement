@@ -1,0 +1,97 @@
+table gold_df_dim_date
+	lineageTag: 2ee5b7fc-4a17-5fb0-b072-d5b124c72ccd
+	dataCategory: Time
+
+	column date
+		isKey
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 43739c20-631b-568c-b7e8-2c7bbdeaa91d
+		summarizeBy: none
+		sourceColumn: date
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 38f8f6d4-a659-5644-8efc-45f6dd5c5ea8
+		summarizeBy: none
+		sourceColumn: year
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 488c8ea2-eafe-506f-be01-cd2824b8ae87
+		summarizeBy: none
+		sourceColumn: quarter
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 31e378c4-09c4-5cd8-9420-38cdbe716cbe
+		summarizeBy: none
+		sourceColumn: month
+
+	column month_name
+		dataType: string
+		lineageTag: b3712b16-f725-5ea3-983b-17d0721930b8
+		summarizeBy: none
+		sourceColumn: month_name
+
+	column year_month
+		dataType: string
+		lineageTag: c07b1df2-f4c4-599c-879c-69f663440def
+		summarizeBy: none
+		sourceColumn: year_month
+
+	column week_start
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 03bf5793-9e78-5f6a-8f7a-58cca4f9b727
+		summarizeBy: none
+		sourceColumn: week_start
+
+	column week_of_year
+		dataType: int64
+		formatString: 0
+		lineageTag: d5cb4e93-351a-526c-adf8-06047ffb4ccb
+		summarizeBy: none
+		sourceColumn: week_of_year
+
+	column weekday
+		dataType: string
+		lineageTag: fe373ac6-86e1-52ed-bc84-e3e1a743e4ad
+		summarizeBy: none
+		sourceColumn: weekday
+
+	column weekday_num
+		dataType: int64
+		formatString: 0
+		lineageTag: ae1bcdd5-62d8-5d2e-8168-0494d7758b1e
+		summarizeBy: none
+		sourceColumn: weekday_num
+
+	column is_weekend
+		dataType: boolean
+		lineageTag: 26eeb6cd-3264-517b-9a12-5eee7f976411
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+	column day_of_month
+		dataType: int64
+		formatString: 0
+		lineageTag: e3092327-c0f3-5804-b34f-9526ccbda65a
+		summarizeBy: none
+		sourceColumn: day_of_month
+
+	column day_of_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 346c81d2-272c-5b6d-bdde-ac4a96b58c28
+		summarizeBy: none
+		sourceColumn: day_of_year
+
+	partition gold_df_dim_date = entity
+		mode: directLake
+		source
+			entityName: gold_df_dim_date
+			expressionSource: DatabaseQuery

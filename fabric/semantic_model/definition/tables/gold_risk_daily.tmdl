@@ -1,0 +1,335 @@
+table gold_risk_daily
+	lineageTag: ceb74f71-4a7a-5dd3-91d5-27c3092e5957
+
+	column station_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d127545-4ae3-5c2e-964a-ec89b6611d1e
+		summarizeBy: none
+		sourceColumn: station_id
+
+	column station_name
+		dataType: string
+		lineageTag: 10a33cef-266e-58bf-aaf8-669a3bc947a5
+		summarizeBy: none
+		sourceColumn: station_name
+
+	column asset
+		dataType: string
+		lineageTag: c73aa57b-aafc-5e95-9ee7-82de96090999
+		summarizeBy: none
+		sourceColumn: asset
+
+	column owner_name
+		dataType: string
+		lineageTag: b52f5582-7eb6-520d-9527-b8ca3f9c7d2f
+		summarizeBy: none
+		sourceColumn: owner_name
+
+	column owner_upn
+		dataType: string
+		lineageTag: 23821fb8-f5e8-56ff-b7e8-6f2211beecc4
+		summarizeBy: none
+		sourceColumn: owner_upn
+
+	column date
+		isKey
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 43739c20-631b-568c-b7e8-2c7bbdeaa91d
+		summarizeBy: none
+		sourceColumn: date
+
+	column weekday
+		dataType: string
+		lineageTag: fe373ac6-86e1-52ed-bc84-e3e1a743e4ad
+		summarizeBy: none
+		sourceColumn: weekday
+
+	column is_weekend
+		dataType: boolean
+		lineageTag: 26eeb6cd-3264-517b-9a12-5eee7f976411
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+	column is_observed
+		dataType: boolean
+		lineageTag: 47c63384-dfa1-59b1-952d-bbe3f14e149e
+		summarizeBy: none
+		sourceColumn: is_observed
+
+	column baseline_phase
+		dataType: string
+		lineageTag: 0382f1ec-4479-50eb-a5f5-8bf7b93c03c0
+		summarizeBy: none
+		sourceColumn: baseline_phase
+
+	column risk_score
+		dataType: double
+		formatString: 0.000
+		lineageTag: 7be756bd-86e8-5891-8164-9b41a0b01703
+		summarizeBy: none
+		sourceColumn: risk_score
+
+	column risk_tier
+		dataType: string
+		lineageTag: 87c7fc31-cadb-50c1-bdd9-19b5a69eff22
+		summarizeBy: none
+		sourceColumn: risk_tier
+
+	column risk_signals
+		dataType: int64
+		formatString: 0
+		lineageTag: 3bbec52a-fa3c-5951-9450-58fd30d24775
+		summarizeBy: none
+		sourceColumn: risk_signals
+
+	column risk_direction
+		dataType: string
+		lineageTag: dc3399d4-501b-5c57-bb57-7a154f06af65
+		summarizeBy: none
+		sourceColumn: risk_direction
+
+	column persistence_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 4635ef41-5ae5-5918-80d0-f1ef83ceb134
+		summarizeBy: none
+		sourceColumn: persistence_days
+
+	column signal_run
+		dataType: int64
+		formatString: 0
+		lineageTag: 19b1342d-1478-5724-a89e-2e90d04e9172
+		summarizeBy: none
+		sourceColumn: signal_run
+
+	column max_bad_z
+		dataType: double
+		formatString: 0.00
+		lineageTag: dda6f05c-d6e5-59d9-9442-f6e0853625d2
+		summarizeBy: none
+		sourceColumn: max_bad_z
+
+	column primary_bad_z
+		dataType: double
+		formatString: 0.00
+		lineageTag: 1e018c44-f652-573e-a673-5dba4ab97d04
+		summarizeBy: none
+		sourceColumn: primary_bad_z
+
+	column weighted_severity
+		dataType: double
+		formatString: 0.0
+		lineageTag: bb21d7e7-ddd8-5ab3-ae97-e012fa665b1e
+		summarizeBy: none
+		sourceColumn: weighted_severity
+
+	column risk_reasons
+		dataType: string
+		lineageTag: 0e099c5b-6574-5f0d-a35c-0192595f0767
+		summarizeBy: none
+		sourceColumn: risk_reasons
+
+	column risk_reasons_json
+		dataType: string
+		lineageTag: 2dd2122e-75e7-5b50-9ae0-e0f821453a94
+		summarizeBy: none
+		sourceColumn: risk_reasons_json
+
+	column top_risk_signal
+		dataType: string
+		lineageTag: 3d6a9fa8-f147-5cfa-b845-753e15d5874a
+		summarizeBy: none
+		sourceColumn: top_risk_signal
+
+	column top_risk_z
+		dataType: double
+		formatString: 0.00
+		lineageTag: 85b6ae3c-7cce-5425-9a5e-b46f164a7f90
+		summarizeBy: none
+		sourceColumn: top_risk_z
+
+	column expected_deferment_pct
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 796a9d09-c108-5c00-9e8a-f06c721f33bc
+		summarizeBy: none
+		sourceColumn: expected_deferment_pct
+
+	column predicted_deferment_pct
+		dataType: double
+		formatString: 0.0%
+		lineageTag: d8949966-0a29-505a-a5e1-029229826bfa
+		summarizeBy: none
+		sourceColumn: predicted_deferment_pct
+
+	column exp_deferred_bbl
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 1e14a8ea-976b-5cec-9bfa-7dd3be7274b1
+		summarizeBy: none
+		sourceColumn: exp_deferred_bbl
+
+	column exp_excess_bbl
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: e3701ae6-f319-50a8-85da-0bdfb6cedc16
+		summarizeBy: none
+		sourceColumn: exp_excess_bbl
+
+	column exp_usd
+		dataType: double
+		formatString: $#,##0
+		lineageTag: e8c79c3c-0db1-5907-8965-4223f95a0354
+		summarizeBy: none
+		sourceColumn: exp_usd
+
+	column potential_oil
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: aaa00b81-b3a8-54bb-8b22-676d4984d75d
+		summarizeBy: none
+		sourceColumn: potential_oil
+
+	column deferred_oil
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 9b7ce3bd-97fb-560c-8a79-d8bea9302adf
+		summarizeBy: none
+		sourceColumn: deferred_oil
+
+	column deferment_pct
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 22c6419c-620b-590a-897c-1355bcf1ec9b
+		summarizeBy: none
+		sourceColumn: deferment_pct
+
+	column oil_price_usd
+		dataType: double
+		formatString: $#,##0
+		lineageTag: 3107160f-cdb0-5e8b-a8aa-7d17d47e497b
+		summarizeBy: none
+		sourceColumn: oil_price_usd
+
+	column deferred_value_usd
+		dataType: double
+		formatString: $#,##0
+		lineageTag: 10c8ae5b-4cc5-53d2-a91e-76edd73ba139
+		summarizeBy: none
+		sourceColumn: deferred_value_usd
+
+	column deferred_value_usd_roll_sum_7
+		dataType: double
+		formatString: $#,##0
+		lineageTag: 4a862f3f-9fb2-5881-a90c-aa1f0f0449ae
+		summarizeBy: none
+		sourceColumn: deferred_value_usd_roll_sum_7
+
+	column event_count_roll_sum_7
+		dataType: double
+		formatString: 0
+		lineageTag: 9aa6a56f-49c4-55b8-b48f-a8e22d186970
+		summarizeBy: none
+		sourceColumn: event_count_roll_sum_7
+
+	column alert_eligible
+		dataType: boolean
+		lineageTag: 80e430a4-fc23-5c97-9c42-9c7de775e7da
+		summarizeBy: none
+		sourceColumn: alert_eligible
+
+	column alert_action
+		dataType: string
+		lineageTag: f8bfbc5d-94f0-5006-93c0-e052eaad6212
+		summarizeBy: none
+		sourceColumn: alert_action
+
+	column suppression_reason
+		dataType: string
+		lineageTag: 87af35bf-7c1a-5063-b067-2e70b03bc850
+		summarizeBy: none
+		sourceColumn: suppression_reason
+
+	column is_latest_date
+		dataType: boolean
+		lineageTag: 21125616-7439-59d0-8aee-f0adced05841
+		summarizeBy: none
+		sourceColumn: is_latest_date
+
+	column ruleset_version
+		dataType: string
+		lineageTag: 06ef6368-5f03-51da-8f87-59dc892e062c
+		summarizeBy: none
+		sourceColumn: ruleset_version
+
+	column baseline_version
+		dataType: string
+		lineageTag: 96348c12-7b5e-57bf-aa37-7ce854c2a449
+		summarizeBy: none
+		sourceColumn: baseline_version
+
+	column computed_at_utc
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:mm:ss
+		lineageTag: b836b26f-3e2c-584d-b98e-e945c1c5d75e
+		summarizeBy: none
+		sourceColumn: computed_at_utc
+
+	measure 'Scored Days' = CALCULATE(COUNTROWS('gold_risk_daily'), 'gold_risk_daily'[baseline_phase] = "scored", 'gold_risk_daily'[is_observed] = TRUE())
+		formatString: #,##0
+		lineageTag: 279d4e94-7864-5ca9-b8d2-616530195ecf
+
+	measure 'Observed Days' = CALCULATE(COUNTROWS('gold_risk_daily'), 'gold_risk_daily'[is_observed] = TRUE())
+		formatString: #,##0
+		lineageTag: b5415937-0480-5687-899d-cc75b8791a8f
+
+	measure 'Data Coverage %' = DIVIDE([Observed Days], COUNTROWS('gold_risk_daily'))
+		formatString: 0.0%
+		lineageTag: 75bf01b4-c06a-5a70-ac1c-9e11bc48cc0a
+
+	measure 'Red Days' = CALCULATE(COUNTROWS('gold_risk_daily'), 'gold_risk_daily'[risk_tier] = "Red", 'gold_risk_daily'[is_observed] = TRUE())
+		formatString: #,##0
+		lineageTag: a9624851-7617-5f17-8b16-bb29e6e36970
+
+	measure 'Amber Days' = CALCULATE(COUNTROWS('gold_risk_daily'), 'gold_risk_daily'[risk_tier] = "Amber", 'gold_risk_daily'[is_observed] = TRUE())
+		formatString: #,##0
+		lineageTag: 0a9668bc-8539-5e58-9f5c-775854ad2292
+
+	measure 'Green Days' = CALCULATE(COUNTROWS('gold_risk_daily'), 'gold_risk_daily'[risk_tier] = "Green", 'gold_risk_daily'[is_observed] = TRUE())
+		formatString: #,##0
+		lineageTag: b7569b24-cf6d-5107-86f3-eb59c68d734d
+
+	measure 'Excess Value at Risk (USD)' = SUM('gold_risk_daily'[exp_usd])
+		formatString: $#,##0
+		lineageTag: b40687e2-3fcf-5000-9d8c-afa7665b30f9
+
+	measure 'Deferred Oil (bbl)' = SUM('gold_risk_daily'[deferred_oil])
+		formatString: #,##0.0
+		lineageTag: fda8904e-bda6-5c0a-8ec7-32257cc24b16
+
+	measure 'Latest Risk Score' = VAR d = CALCULATE(MAX('gold_risk_daily'[date]), 'gold_risk_daily'[is_observed] = TRUE()) RETURN CALCULATE(MAX('gold_risk_daily'[risk_score]), 'gold_df_dim_date'[date] = d)
+		formatString: 0.000
+		lineageTag: 1c2311e7-27e6-578a-b2ac-1de897b783db
+
+	measure 'Risk Score' = MAX('gold_risk_daily'[risk_score])
+		formatString: 0.000
+		lineageTag: 959ac938-4873-566d-a0e0-0977caeca958
+
+	measure 'Latest Risk Tier' = VAR d = CALCULATE(MAX('gold_risk_daily'[date]), 'gold_risk_daily'[is_observed] = TRUE()) RETURN CALCULATE(FIRSTNONBLANK('gold_risk_daily'[risk_tier], 1), 'gold_df_dim_date'[date] = d, 'gold_risk_daily'[is_observed] = TRUE())
+		lineageTag: 76b25107-48a6-5002-9255-3499a87768b1
+
+	measure 'Stations at Red (latest)' = VAR d = CALCULATE(MAX('gold_risk_daily'[date]), 'gold_risk_daily'[is_observed] = TRUE()) RETURN COALESCE(CALCULATE(DISTINCTCOUNT('gold_risk_daily'[station_id]), 'gold_df_dim_date'[date] = d, 'gold_risk_daily'[risk_tier] = "Red"), 0)
+		formatString: #,##0
+		lineageTag: c0081ff2-4dd4-555e-8d00-4229704f70e8
+
+	measure 'Latest Observed Date' = CALCULATE(MAX('gold_risk_daily'[date]), 'gold_risk_daily'[is_observed] = TRUE())
+		formatString: yyyy-mm-dd
+		lineageTag: 3a5710d5-42d1-5dba-97c3-7b4cf09ea03a
+
+	partition gold_risk_daily = entity
+		mode: directLake
+		source
+			entityName: gold_risk_daily
+			expressionSource: DatabaseQuery

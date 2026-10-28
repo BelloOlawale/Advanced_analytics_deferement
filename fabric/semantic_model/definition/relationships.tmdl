@@ -1,0 +1,31 @@
+relationship e0a97d48-9197-5d7a-8634-d2c47c709bfb
+	fromColumn: gold_risk_daily.date
+	toColumn: gold_df_dim_date.date
+
+relationship ca7a85ba-7456-5edc-a8aa-9463fd891731
+	fromColumn: gold_deviation_daily.date
+	toColumn: gold_df_dim_date.date
+
+relationship 7323ff47-daaf-5d1e-a15b-ddd965c8b31b
+	fromColumn: gold_alert.alert_date
+	toColumn: gold_df_dim_date.date
+
+relationship a11b9965-6f3c-5dd9-8c87-47612ac272cf
+	fromColumn: gold_risk_daily.station_id
+	toColumn: gold_df_dim_station.station_id
+
+relationship 53be22c4-614e-5181-8b9f-bb63ba6b0978
+	fromColumn: gold_deviation_daily.entity_id
+	toColumn: gold_df_dim_station.station_id
+
+relationship d288fc77-1b86-5732-bd4b-3a5b83d25a53
+	fromColumn: gold_alert.station_id
+	toColumn: gold_df_dim_station.station_id
+
+relationship f3fffb23-0681-544b-a2d4-6aa73c0919d3
+	fromColumn: gold_entity_baseline.entity_id
+	toColumn: gold_df_dim_station.station_id
+
+relationship eb326251-ff52-533d-9b50-af099b6fadd7
+	fromColumn: gold_alert_outcome.alert_id
+	toColumn: gold_alert.alert_id

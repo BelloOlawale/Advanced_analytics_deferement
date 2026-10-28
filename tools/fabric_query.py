@@ -6,7 +6,10 @@ SAFETY: this tool refuses to send anything but a single SELECT / WITH statement.
 It never issues DDL or DML. Combined with a read-only database role, the agent
 cannot change data even if asked to.
 
-CONFIG (from environment, or from a .env file in the repo root):
+CONFIG (from environment, or from a profile file in the repo root):
+    FABRIC_ENV          profile to load: local | sandbox | customer | ...
+                        (default: local, which reads `.env`)
+                        sandbox reads `.env.sandbox`, etc.
     FABRIC_SQL_CONN     full connection string (takes precedence if set)
     FABRIC_SQL_SERVER   e.g. <warehouse>@<workspace>.datawarehouse.fabric.microsoft.com
     FABRIC_SQL_DATABASE warehouse / database name
@@ -17,7 +20,8 @@ CONFIG (from environment, or from a .env file in the repo root):
     FABRIC_QUERY_TIMEOUT  per-statement seconds (default 300)
 
 USAGE:
-    python tools/fabric_query.py --test
+    python tools/fabric_query.py --env sandbox --show-env
+    python tools/fabric_query.py --env sandbox --test
     python tools/fabric_query.py --info
     python tools/fabric_query.py "SELECT TOP 5 * FROM production.flowstations_dim"
     python tools/fabric_query.py --csv data/oml24_flowstations_dim.csv \
@@ -35,6 +39,14 @@ import os
 import re
 import sys
 from pathlib import Path
+
+try:
+    import env_config
+except ModuleNotFoundError:  # e.g. `python -m tools.fabric_query`
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import env_config
 
 REPO = Path(__file__).resolve().parent.parent
 LOG_DIR = REPO / "logs"
@@ -78,19 +90,6 @@ def assert_read_only(sql: str) -> None:
 
 # --- config ----------------------------------------------------------------
 
-def _load_dotenv() -> None:
-    env = REPO / ".env"
-    if not env.exists():
-        return
-    for raw in env.read_text(encoding="utf-8").splitlines():
-        line = raw.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        k, v = line.split("=", 1)
-        k, v = k.strip(), v.strip().strip('"').strip("'")
-        os.environ.setdefault(k, v)
-
-
 def connection_string() -> str:
     full = os.environ.get("FABRIC_SQL_CONN")
     if full:
@@ -98,9 +97,11 @@ def connection_string() -> str:
     server = os.environ.get("FABRIC_SQL_SERVER")
     database = os.environ.get("FABRIC_SQL_DATABASE")
     if not server or not database:
+        profile = os.environ.get("FABRIC_ENV", "local")
         raise SystemExit(
-            "Missing config: set FABRIC_SQL_SERVER and FABRIC_SQL_DATABASE "
-            "(or FABRIC_SQL_CONN) in .env or the environment."
+            f"Missing config for profile '{profile}': set FABRIC_SQL_SERVER and "
+            "FABRIC_SQL_DATABASE (or FABRIC_SQL_CONN) in the matching .env file "
+            "or the environment. Run with --show-env to see what is loaded."
         )
     auth = os.environ.get("FABRIC_SQL_AUTH", "default").lower()
     auth_map = {
@@ -197,16 +198,40 @@ def info() -> int:
     return run(sql, max_print=500)
 
 
+def show_env() -> int:
+    """Print the active profile with secrets redacted."""
+    info = env_config.load()  # idempotent; already loaded by main()
+    print(f"profile : {info['profile']}")
+    print(f"file    : {info['file']}  ({'found' if info['found'] else 'NOT FOUND'})")
+    print()
+    width = max(len(k) for k, _ in env_config.describe())
+    for key, value in env_config.describe():
+        print(f"{key.ljust(width)} : {value}")
+    return 0 if info["found"] else 1
+
+
 def main() -> int:
-    _load_dotenv()
     ap = argparse.ArgumentParser(description="Read-only Fabric Warehouse query tool.")
     ap.add_argument("sql", nargs="?", help="a single SELECT/WITH statement")
     ap.add_argument("--csv", help="write the full result to this CSV path")
     ap.add_argument("--test", action="store_true", help="connect and SELECT 1")
     ap.add_argument("--info", action="store_true", help="list tables/columns")
     ap.add_argument("--max-print", type=int, default=50)
+    ap.add_argument(
+        "--env",
+        help="environment profile to load (default: FABRIC_ENV or 'local')",
+    )
+    ap.add_argument(
+        "--show-env",
+        action="store_true",
+        help="show the active profile and connection settings (secrets redacted)",
+    )
     args = ap.parse_args()
 
+    env_config.load(args.env)
+
+    if args.show_env:
+        return show_env()
     if args.test:
         return run("SELECT 1 AS ok")
     if args.info:

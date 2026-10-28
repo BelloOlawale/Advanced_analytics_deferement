@@ -1,0 +1,40 @@
+table gold_df_dim_station
+	lineageTag: cee0a65f-c2ed-5d49-9e82-1e37c960364b
+
+	column station_id
+		isKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d127545-4ae3-5c2e-964a-ec89b6611d1e
+		summarizeBy: none
+		sourceColumn: station_id
+
+	column station_name
+		dataType: string
+		lineageTag: 10a33cef-266e-58bf-aaf8-669a3bc947a5
+		summarizeBy: none
+		sourceColumn: station_name
+
+	column asset
+		dataType: string
+		lineageTag: c73aa57b-aafc-5e95-9ee7-82de96090999
+		summarizeBy: none
+		sourceColumn: asset
+
+	column owner_name
+		dataType: string
+		lineageTag: b52f5582-7eb6-520d-9527-b8ca3f9c7d2f
+		summarizeBy: none
+		sourceColumn: owner_name
+
+	column owner_upn
+		dataType: string
+		lineageTag: 23821fb8-f5e8-56ff-b7e8-6f2211beecc4
+		summarizeBy: none
+		sourceColumn: owner_upn
+
+	partition gold_df_dim_station = entity
+		mode: directLake
+		source
+			entityName: gold_df_dim_station
+			expressionSource: DatabaseQuery

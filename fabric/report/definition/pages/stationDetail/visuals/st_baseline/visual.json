@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "st_baseline",
+  "position": {
+    "x": 20,
+    "y": 470,
+    "z": 2200,
+    "height": 230,
+    "width": 610,
+    "tabOrder": 2200
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_entity_baseline"
+                    }
+                  },
+                  "Property": "metric"
+                }
+              },
+              "queryRef": "gold_entity_baseline.metric"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_entity_baseline"
+                    }
+                  },
+                  "Property": "median"
+                }
+              },
+              "queryRef": "gold_entity_baseline.median",
+              "displayName": "Median"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_entity_baseline"
+                    }
+                  },
+                  "Property": "p10"
+                }
+              },
+              "queryRef": "gold_entity_baseline.p10",
+              "displayName": "P10"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_entity_baseline"
+                    }
+                  },
+                  "Property": "p90"
+                }
+              },
+              "queryRef": "gold_entity_baseline.p90",
+              "displayName": "P90"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_entity_baseline"
+                    }
+                  },
+                  "Property": "robust_scale"
+                }
+              },
+              "queryRef": "gold_entity_baseline.robust_scale",
+              "displayName": "Robust scale"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_entity_baseline"
+                  }
+                },
+                "Property": "metric"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Station normal range'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'12'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

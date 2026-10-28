@@ -1,0 +1,119 @@
+table gold_alert_outcome
+	lineageTag: d976f0f2-bf96-59e0-8448-081ca0d8fa5d
+
+	column alert_id
+		dataType: string
+		lineageTag: 580f5195-f5ee-5598-809a-e8afb77ecea0
+		summarizeBy: none
+		sourceColumn: alert_id
+
+	column outcome_recorded_at_utc
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:mm:ss
+		lineageTag: d5883c49-2d67-556f-887f-a2b5b489401a
+		summarizeBy: none
+		sourceColumn: outcome_recorded_at_utc
+
+	column event_occurred
+		dataType: boolean
+		lineageTag: d468c143-1b06-5c96-b30e-d80c9e698875
+		summarizeBy: none
+		sourceColumn: event_occurred
+
+	column event_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 0b006315-6da6-5aa1-bb9b-881edcdac65e
+		summarizeBy: none
+		sourceColumn: event_date
+
+	column actual_lead_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 45e96131-924b-5214-a470-cf6a768af58a
+		summarizeBy: none
+		sourceColumn: actual_lead_days
+
+	column detection_type
+		dataType: string
+		lineageTag: 3dac0d73-d206-5e97-97c1-1fa6ac1a434e
+		summarizeBy: none
+		sourceColumn: detection_type
+
+	column disposition
+		dataType: string
+		lineageTag: 4626dd1b-8a42-524b-961f-00aa4cfeff3b
+		summarizeBy: none
+		sourceColumn: disposition
+
+	column acknowledged_by
+		dataType: string
+		lineageTag: cea7b215-f000-5a93-995d-6209eeb33a7e
+		summarizeBy: none
+		sourceColumn: acknowledged_by
+
+	column acknowledged_at_utc
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:mm:ss
+		lineageTag: 64e30b73-7c10-5f09-b2d5-0fd6ac022bd8
+		summarizeBy: none
+		sourceColumn: acknowledged_at_utc
+
+	column action_note
+		dataType: string
+		lineageTag: efee42ba-f25f-5368-9e14-d3f892870986
+		summarizeBy: none
+		sourceColumn: action_note
+
+	column false_reason
+		dataType: string
+		lineageTag: a1911fbf-48bf-5998-983d-551f876a8db6
+		summarizeBy: none
+		sourceColumn: false_reason
+
+	column updated_at_utc
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:mm:ss
+		lineageTag: 0f29f41d-1c72-5e2e-a93b-764bac0e8a95
+		summarizeBy: none
+		sourceColumn: updated_at_utc
+
+	measure 'Alerts with Outcome' = COALESCE(CALCULATE(COUNTROWS('gold_alert_outcome'), NOT(ISBLANK('gold_alert_outcome'[event_occurred]))), 0)
+		formatString: #,##0
+		lineageTag: 6e316cbc-7724-5d42-bbab-f4a036abc211
+
+	measure 'Alerts Confirmed' = COALESCE(CALCULATE(COUNTROWS('gold_alert_outcome'), 'gold_alert_outcome'[event_occurred] = TRUE()), 0)
+		formatString: #,##0
+		lineageTag: e98b1a26-a8dc-585c-be29-914a3ec74e32
+
+	measure 'Alert Precision %' = DIVIDE([Alerts Confirmed], [Alerts with Outcome])
+		formatString: 0.0%
+		lineageTag: 8197102c-ddfa-553f-a7d5-9624a01f1e3d
+
+	measure 'False Alarm Rate %' = DIVIDE([Alerts with Outcome] - [Alerts Confirmed], [Alerts with Outcome])
+		formatString: 0.0%
+		lineageTag: 52a1854f-2473-5716-92c7-c883230f9649
+
+	measure 'Median Lead Time (days)' = CALCULATE(MEDIAN('gold_alert_outcome'[actual_lead_days]), 'gold_alert_outcome'[event_occurred] = TRUE())
+		formatString: 0.0
+		lineageTag: 58a67f31-c44b-5e77-bf05-0154f0b45950
+
+	measure 'Average Lead Time (days)' = CALCULATE(AVERAGE('gold_alert_outcome'[actual_lead_days]), 'gold_alert_outcome'[event_occurred] = TRUE())
+		formatString: 0.0
+		lineageTag: 14c9c053-a2af-53ce-80ef-1cfe6f469576
+
+	measure 'Alerts Awaiting Outcome' = [Alerts Fired] - [Alerts with Outcome]
+		formatString: #,##0
+		lineageTag: d07a2790-9c21-556e-a220-38345014d49b
+
+	measure 'Precision Display' = IF([Alerts with Outcome] = 0, "No evaluated outcomes yet", FORMAT([Alert Precision %], "0.0%"))
+		lineageTag: f63165aa-597f-5cf0-bc5e-eb8504c516bb
+
+	measure 'Lead Time Display' = IF([Alerts with Outcome] = 0, "No evaluated outcomes yet", FORMAT([Median Lead Time (days)], "0.0") & " days")
+		lineageTag: 38ae2c44-6faf-577d-ac45-90c052cb213a
+
+	partition gold_alert_outcome = entity
+		mode: directLake
+		source
+			entityName: gold_alert_outcome
+			expressionSource: DatabaseQuery

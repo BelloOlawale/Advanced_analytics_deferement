@@ -1,0 +1,193 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "outcomes_table",
+  "position": {
+    "x": 20,
+    "y": 290,
+    "z": 2000,
+    "height": 410,
+    "width": 1240,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_df_dim_date"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "gold_df_dim_date.date",
+              "displayName": "Alert date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_df_dim_station"
+                    }
+                  },
+                  "Property": "station_name"
+                }
+              },
+              "queryRef": "gold_df_dim_station.station_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_alert"
+                    }
+                  },
+                  "Property": "tier"
+                }
+              },
+              "queryRef": "gold_alert.tier"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_alert_outcome"
+                    }
+                  },
+                  "Property": "event_occurred"
+                }
+              },
+              "queryRef": "gold_alert_outcome.event_occurred",
+              "displayName": "Event"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_alert_outcome"
+                    }
+                  },
+                  "Property": "event_date"
+                }
+              },
+              "queryRef": "gold_alert_outcome.event_date",
+              "displayName": "Event date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_alert_outcome"
+                    }
+                  },
+                  "Property": "actual_lead_days"
+                }
+              },
+              "queryRef": "gold_alert_outcome.actual_lead_days",
+              "displayName": "Lead days"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_alert_outcome"
+                    }
+                  },
+                  "Property": "detection_type"
+                }
+              },
+              "queryRef": "gold_alert_outcome.detection_type",
+              "displayName": "Detection"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_alert_outcome"
+                    }
+                  },
+                  "Property": "disposition"
+                }
+              },
+              "queryRef": "gold_alert_outcome.disposition"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_alert_outcome"
+                    }
+                  },
+                  "Property": "action_note"
+                }
+              },
+              "queryRef": "gold_alert_outcome.action_note",
+              "displayName": "Action note"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_df_dim_date"
+                  }
+                },
+                "Property": "date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Recorded outcomes'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'12'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

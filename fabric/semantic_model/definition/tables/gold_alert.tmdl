@@ -1,0 +1,206 @@
+table gold_alert
+	lineageTag: beb47192-0dab-58de-8282-ae5363c21b2f
+
+	column alert_id
+		isKey
+		dataType: string
+		lineageTag: 580f5195-f5ee-5598-809a-e8afb77ecea0
+		summarizeBy: none
+		sourceColumn: alert_id
+
+	column alert_key
+		dataType: string
+		lineageTag: f2b1ad38-5d23-57ff-9de7-23c4a95ba4e1
+		summarizeBy: none
+		sourceColumn: alert_key
+
+	column station_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d127545-4ae3-5c2e-964a-ec89b6611d1e
+		summarizeBy: none
+		sourceColumn: station_id
+
+	column station_name
+		dataType: string
+		lineageTag: 10a33cef-266e-58bf-aaf8-669a3bc947a5
+		summarizeBy: none
+		sourceColumn: station_name
+
+	column asset
+		dataType: string
+		lineageTag: c73aa57b-aafc-5e95-9ee7-82de96090999
+		summarizeBy: none
+		sourceColumn: asset
+
+	column owner_name
+		dataType: string
+		lineageTag: b52f5582-7eb6-520d-9527-b8ca3f9c7d2f
+		summarizeBy: none
+		sourceColumn: owner_name
+
+	column owner_upn
+		dataType: string
+		lineageTag: 23821fb8-f5e8-56ff-b7e8-6f2211beecc4
+		summarizeBy: none
+		sourceColumn: owner_upn
+
+	column alert_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 1c61213e-6607-51e2-a20d-b6f8d8f717ca
+		summarizeBy: none
+		sourceColumn: alert_date
+
+	column tier
+		dataType: string
+		lineageTag: a7f56d47-69f9-5ce0-8ad6-845fa6e25a50
+		summarizeBy: none
+		sourceColumn: tier
+
+	column previous_tier
+		dataType: string
+		lineageTag: dc4b9721-a9bf-5a74-8347-9df719e1d29f
+		summarizeBy: none
+		sourceColumn: previous_tier
+
+	column alert_type
+		dataType: string
+		lineageTag: ffd9b8aa-a5e4-55b2-869f-c6fe96d378ea
+		summarizeBy: none
+		sourceColumn: alert_type
+
+	column risk_score
+		dataType: double
+		formatString: 0.000
+		lineageTag: 7be756bd-86e8-5891-8164-9b41a0b01703
+		summarizeBy: none
+		sourceColumn: risk_score
+
+	column risk_reasons
+		dataType: string
+		lineageTag: 0e099c5b-6574-5f0d-a35c-0192595f0767
+		summarizeBy: none
+		sourceColumn: risk_reasons
+
+	column risk_reasons_json
+		dataType: string
+		lineageTag: 2dd2122e-75e7-5b50-9ae0-e0f821453a94
+		summarizeBy: none
+		sourceColumn: risk_reasons_json
+
+	column top_signal
+		dataType: string
+		lineageTag: 9003a47f-cc5d-5f8e-8e8f-21dcef49b681
+		summarizeBy: none
+		sourceColumn: top_signal
+
+	column top_signal_z
+		dataType: double
+		formatString: 0.00
+		lineageTag: cd277a22-4e04-52cf-a0f0-a25dbd1cf216
+		summarizeBy: none
+		sourceColumn: top_signal_z
+
+	column persistence_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 4635ef41-5ae5-5918-80d0-f1ef83ceb134
+		summarizeBy: none
+		sourceColumn: persistence_days
+
+	column signal_run
+		dataType: int64
+		formatString: 0
+		lineageTag: 19b1342d-1478-5724-a89e-2e90d04e9172
+		summarizeBy: none
+		sourceColumn: signal_run
+
+	column exp_deferred_bbl
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 1e14a8ea-976b-5cec-9bfa-7dd3be7274b1
+		summarizeBy: none
+		sourceColumn: exp_deferred_bbl
+
+	column exp_usd
+		dataType: double
+		formatString: $#,##0
+		lineageTag: e8c79c3c-0db1-5907-8965-4223f95a0354
+		summarizeBy: none
+		sourceColumn: exp_usd
+
+	column ruleset_version
+		dataType: string
+		lineageTag: 06ef6368-5f03-51da-8f87-59dc892e062c
+		summarizeBy: none
+		sourceColumn: ruleset_version
+
+	column baseline_version
+		dataType: string
+		lineageTag: 96348c12-7b5e-57bf-aa37-7ce854c2a449
+		summarizeBy: none
+		sourceColumn: baseline_version
+
+	column fired_at_utc
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:mm:ss
+		lineageTag: 220bea00-3c54-51e7-9a55-8b90b6e11aac
+		summarizeBy: none
+		sourceColumn: fired_at_utc
+
+	column alert_status
+		dataType: string
+		lineageTag: b65422b6-6d68-5abd-bda1-f7d7e32feeca
+		summarizeBy: none
+		sourceColumn: alert_status
+
+	column notification_channel
+		dataType: string
+		lineageTag: 8b42f644-bdc7-522e-adb4-cc7372c7984a
+		summarizeBy: none
+		sourceColumn: notification_channel
+
+	column notification_target
+		dataType: string
+		lineageTag: 970c4402-85de-53f3-a8dd-94228dea265e
+		summarizeBy: none
+		sourceColumn: notification_target
+
+	measure 'Alerts Fired' = COUNTROWS('gold_alert')
+		formatString: #,##0
+		lineageTag: 01746caa-1f9b-538c-8876-3c47d2ed7a09
+
+	measure 'Red Alerts' = CALCULATE(COUNTROWS('gold_alert'), 'gold_alert'[tier] = "Red")
+		formatString: #,##0
+		lineageTag: 8d8a5909-5ac2-5f30-8d4a-f6dd1acfdda8
+
+	measure 'Amber Alerts' = CALCULATE(COUNTROWS('gold_alert'), 'gold_alert'[tier] = "Amber")
+		formatString: #,##0
+		lineageTag: dc8c26d5-e173-507f-be41-97b0eadc6d78
+
+	measure 'Open Alerts' = CALCULATE(COUNTROWS('gold_alert'), NOT('gold_alert'[alert_status] IN {"Closed", "Resolved", "Dismissed"}))
+		formatString: #,##0
+		lineageTag: 1d5037d7-a4e8-5faa-b9a9-5eab1087fe16
+
+	measure 'Excess USD at Alert' = SUM('gold_alert'[exp_usd])
+		formatString: $#,##0
+		lineageTag: 56d66f72-cd82-5d9b-a596-7a479010661a
+
+	measure 'Largest Alert (USD)' = MAX('gold_alert'[exp_usd])
+		formatString: $#,##0
+		lineageTag: ee749fe6-e607-5acc-b0bd-8ad914c96186
+
+	measure 'Alerted Stations' = DISTINCTCOUNT('gold_alert'[station_id])
+		formatString: #,##0
+		lineageTag: 4f31f19b-552e-5934-9d53-aa441d60742b
+
+	measure 'Alert Rate per Station per Week' = VAR n_alerts = COUNTROWS('gold_alert') VAR n_stations = DISTINCTCOUNT('gold_alert'[station_id]) VAR first_d = MIN('gold_alert'[alert_date]) VAR last_d = MAX('gold_alert'[alert_date]) VAR days = DATEDIFF(first_d, last_d, DAY) + 1 RETURN DIVIDE(n_alerts, n_stations * DIVIDE(days, 7))
+		formatString: 0.00
+		lineageTag: a081e0cf-55a2-52df-b7d9-bdb79f43697b
+
+	partition gold_alert = entity
+		mode: directLake
+		source
+			entityName: gold_alert
+			expressionSource: DatabaseQuery

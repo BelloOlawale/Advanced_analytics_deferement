@@ -1,0 +1,5 @@
+expression DatabaseQuery =
+	let
+		Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/355cd573-8b17-430a-b606-c6b9424d36a1/df9a08e5-b370-4c2a-b608-6d0f326003ef", [HierarchicalNavigation=true])
+	in
+		Source

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "outcomes_note",
+  "position": {
+    "x": 20,
+    "y": 90,
+    "z": 1100,
+    "height": 65,
+    "width": 1240,
+    "tabOrder": 1100
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Outcomes are computed automatically. An alert is confirmed if a coded onset or a large-loss onset (deferred oil at or above the station's own p90 after 3 quiet days) occurs within 7 days after the alert. Pending means the 7-day window extends beyond the data.",
+                    "textStyle": {
+                      "fontSize": "10pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -22,3 +22,16 @@ e.g. `oml24_deferment_fact_20231001_20261001.csv`
 
 Queries: see `../deferment-data-extraction-pack.md` (§2), DQ checks (§3).
 How to grant live access: see `../how-to-give-agent-data-access.md`.
+
+## Generating test data for a new environment
+
+If a new tenant has no source data, seed from these extracts:
+
+```bash
+python tools/generate_test_data.py --env sandbox --days 180 --anonymise
+```
+
+This writes an upload-ready set under `test_data/sandbox/` (git-ignored) with
+`raw/` and `ref/` folders. See `docs/test-environment-setup.md`.
+The generator can also run fully synthetic (`--source synthetic`) when the
+extracts are not present.

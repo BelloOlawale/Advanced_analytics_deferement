@@ -1,0 +1,123 @@
+{
+  "properties": {
+    "description": "Daily deferment early-warning build: bronze -> silver -> gold features -> risk/alerts -> dimensions -> DQ gate. Runs sequentially with retries.",
+    "parameters": {
+      "notebook_ids": {
+        "type": "Array",
+        "defaultValue": [
+          "7b53bc2e-e4f9-49f4-a0ec-18f33ad7a74f",
+          "aee945bd-02a7-49aa-adaa-f57799106b05",
+          "31649865-f498-427c-91c7-fd77ed5eeb8d",
+          "ed822f3c-c442-47f6-82f4-d7313f7f6e2a",
+          "db3753c3-9b77-4341-8e43-194646352681",
+          "effcd5bf-f960-4523-9028-661e0f6401fe",
+          "a6ffe2c4-5de0-4bbf-9f5e-2d663fb96a0a"
+        ]
+      },
+      "alert_webhook_url": {
+        "type": "String",
+        "defaultValue": ""
+      }
+    },
+    "activities": [
+      {
+        "name": "Run_notebooks",
+        "type": "ForEach",
+        "dependsOn": [],
+        "typeProperties": {
+          "items": {
+            "value": "@pipeline().parameters.notebook_ids",
+            "type": "Expression"
+          },
+          "isSequential": true,
+          "activities": [
+            {
+              "name": "Run_notebook",
+              "type": "TridentNotebook",
+              "dependsOn": [],
+              "policy": {
+                "timeout": "0.02:00:00",
+                "retry": 2,
+                "retryIntervalInSeconds": 120,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "typeProperties": {
+                "notebookId": {
+                  "value": "@item()",
+                  "type": "Expression"
+                },
+                "workspaceId": "355cd573-8b17-430a-b606-c6b9424d36a1"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Webhook_configured",
+        "type": "IfCondition",
+        "dependsOn": [
+          {
+            "activity": "Run_notebooks",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "expression": {
+            "value": "@not(equals(pipeline().parameters.alert_webhook_url, ''))",
+            "type": "Expression"
+          },
+          "ifTrueActivities": [
+            {
+              "name": "Send_failure_alert",
+              "type": "WebActivity",
+              "dependsOn": [],
+              "typeProperties": {
+                "url": "@pipeline().parameters.alert_webhook_url",
+                "method": "POST",
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "value": "@json(concat('{\"pipeline\":\"', pipeline().Pipeline, '\",\"runId\":\"', pipeline().RunId, '\",\"status\":\"FAILED\",\"message\":\"One or more notebooks failed after retries. Check the Monitoring hub.\"}'))",
+                  "type": "Expression"
+                }
+              }
+            }
+          ],
+          "ifFalseActivities": [
+            {
+              "name": "No_webhook_configured",
+              "type": "Wait",
+              "dependsOn": [],
+              "typeProperties": {
+                "waitTimeInSeconds": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Fail_pipeline",
+        "type": "Fail",
+        "dependsOn": [
+          {
+            "activity": "Webhook_configured",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "message": {
+            "value": "@concat('Daily build failed. Pipeline run: ', pipeline().RunId, '. Check the Monitoring hub for the failing notebook.')",
+            "type": "Expression"
+          },
+          "errorCode": "DF_DAILY_BUILD_FAILED"
+        }
+      }
+    ]
+  }
+}
